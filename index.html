@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ranjith R — AI/ML Engineer</title>
+<meta name="description" content="AI/ML Engineer working on production LLM systems and document intelligence: financial document extraction at scale, model fine-tuning, self-hosted inference infrastructure, and browser automation agents.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-in">
+    <a class="nav-name" href="#top">Ranjith R</a>
+    <div class="nav-links">
+      <a href="#extraction">Document extraction</a>
+      <a href="#training">Fine-tuning</a>
+      <a href="#gateway">Inference</a>
+      <a href="#agent">Navigation agent</a>
+      <a href="#stack">What I work with</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================ HERO ============================ -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <h1 class="rise d1">Ranjith R</h1>
+    <div class="hero-role rise d2">AI/ML Engineer</div>
+    <p class="hero-line rise d3">I build the parts of LLM systems that don't demo well.</p>
+    <p class="hero-sub rise d4">
+      Two and a half years on production document intelligence. I designed a pipeline that turns
+      unstructured financial filings into structured JSON. It became my company's core product,
+      and it has processed over a million documents.
+    </p>
+    <nav class="hero-links rise d5">
+      <a class="pill pill-solid" href="#extraction">See how it works</a>
+      <a class="pill" href="#stack">What I work with</a>
+      <a class="pill" href="mailto:ranjith.ofcl@gmail.com">ranjith.ofcl@gmail.com</a>
+      <a class="pill" href="tel:+919940036536">+91 99400 36536</a>
+      <a class="pill" href="https://www.linkedin.com/in/ranjith-ofcl/">LinkedIn</a>
+      <a class="pill" href="https://github.com/ranjith-ofcl">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ==================== SEQUENCE 1: EXTRACTION ==================== -->
+<section class="section" id="extraction">
+  <div class="wrap">
+    <span class="eyebrow">financial_document_extraction</span>
+
+    <div class="seq-intro-m">
+      <h2>A filing goes in. Structured data comes out.</h2>
+      <p>
+        Annual reports arrive as scanned PDFs, born-digital exports, and everything in between,
+        from jurisdictions that each format their statements differently. The pipeline resolves
+        them into one schema. Here is what happens to a page on its way through.
+      </p>
+    </div>
+
+    <div class="seq">
+      <div class="seq-col">
+        <div class="seq-sticky">
+          <div class="seq-intro">
+            <h2>A filing goes in. Structured data comes out.</h2>
+            <p>
+              Annual reports arrive as scanned PDFs, born-digital exports, and everything in
+              between, from jurisdictions that each format their statements differently. The
+              pipeline resolves them into one schema. Scroll to follow a page through it.
+            </p>
+          </div>
+
+          <div class="rail" id="rail1" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+          <div class="device">
+            <div class="chrome">
+              <span>filing_page_04.pdf</span>
+              <span class="now-label" id="label1"><i class="dot"></i>stage 01 · ocr</span>
+            </div>
+            <div class="doc" id="doc" data-stage="0">
+              <div class="doc-head">Consolidated Statement of Financial Position</div>
+              <div class="doc-sub">for the year ended 31 December &nbsp;·&nbsp; amounts in thousands</div>
+              <div class="tline" style="width:96%"></div>
+              <div class="tline" style="width:88%"></div>
+              <div class="tline" style="width:72%"></div>
+              <table class="tbl">
+                <thead>
+                  <tr>
+                    <th><span class="colrole">role: label</span>Item</th>
+                    <th class="num"><span class="colrole">role: cy</span>Current</th>
+                    <th class="num"><span class="colrole">role: py</span>Prior</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="keep"><td class="lbl">Non-current assets</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
+                  <tr class="child keep"><td>Property, plant and equipment</td><td class="num">18,402</td><td class="num">16,955</td></tr>
+                  <tr class="child keep"><td>Intangible assets</td><td class="num">4,118</td><td class="num">3,740</td></tr>
+                  <tr class="child2 drop"><td>Goodwill</td><td class="num">2,650</td><td class="num">2,650</td></tr>
+                  <tr class="child drop"><td>Deferred tax assets</td><td class="num">907</td><td class="num">1,102</td></tr>
+                  <tr class="tot keep"><td>Total non-current assets</td><td class="num">26,077</td><td class="num">24,447</td></tr>
+                  <tr class="keep"><td class="lbl">Current assets</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
+                  <tr class="child keep"><td>Inventories</td><td class="num">7,331</td><td class="num">6,884</td></tr>
+                  <tr class="child keep"><td>Trade receivables</td><td class="num">11,205</td><td class="num">9,517</td></tr>
+                  <tr class="child drop"><td>Cash and cash equivalents</td><td class="num">3,946</td><td class="num">5,220</td></tr>
+                  <tr class="tot keep"><td>Total current assets</td><td class="num">22,482</td><td class="num">21,621</td></tr>
+                  <tr class="tot keep"><td>Total assets</td><td class="num">48,559</td><td class="num">46,068</td></tr>
+                </tbody>
+              </table>
+              <div class="tline" style="width:64%; margin-top:12px"></div>
+
+              <div class="badges">
+                <b>page_class: balance_sheet</b>
+                <b>routed downstream</b>
+                <b class="alt">82 of 90 pages dropped</b>
+              </div>
+
+              <div class="json">
+<span class="k">"statement"</span>: <span class="v">"balance_sheet"</span>,<br>
+<span class="k">"period"</span>: { <span class="k">"cy"</span>: <span class="v">"FY-current"</span>, <span class="k">"py"</span>: <span class="v">"FY-prior"</span> },<br>
+<span class="k">"unit"</span>: <span class="v">"thousands"</span>,<br>
+<span class="k">"lines"</span>: [<br>
+&nbsp;&nbsp;{ <span class="k">"label"</span>: <span class="v">"non_current_assets"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">"children"</span>: [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="k">"label"</span>: <span class="v">"ppe"</span>, <span class="k">"cy"</span>: <span class="n">18402</span>, <span class="k">"py"</span>: <span class="n">16955</span> },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="k">"label"</span>: <span class="v">"intangibles"</span>, <span class="k">"cy"</span>: <span class="n">4118</span>, <span class="k">"py"</span>: <span class="n">3740</span> }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">"total"</span>: { <span class="k">"cy"</span>: <span class="n">26077</span>, <span class="k">"py"</span>: <span class="n">24447</span> } },<br>
+&nbsp;&nbsp;{ <span class="k">"label"</span>: <span class="v">"current_assets"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">"total"</span>: { <span class="k">"cy"</span>: <span class="n">22482</span>, <span class="k">"py"</span>: <span class="n">21621</span> } }<br>
+],<br>
+<span class="k">"total_assets"</span>: { <span class="k">"cy"</span>: <span class="n">48559</span>, <span class="k">"py"</span>: <span class="n">46068</span> }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="steps" id="steps1">
+        <article class="step" data-stage="1">
+          <div class="step-no">stage 01</div>
+          <h3>Read everything first, understand nothing yet</h3>
+          <p>
+            Every page gets plain-text OCR before any decision is made about it. This looks
+            wasteful, since most pages in an annual report are narrative that will never be
+            extracted, but it is the only way to classify a page on content rather than on
+            position. Filings don't put the balance sheet on page 12 by agreement.
+          </p>
+          <p>The output here is deliberately dumb: text and coordinates, no interpretation.</p>
+        </article>
+
+        <article class="step" data-stage="2">
+          <div class="step-no">stage 02</div>
+          <h3>Throw most of the document away</h3>
+          <p>
+            A page classifier sorts every page into one of six classes and routes only the
+            financial statements onward. A 90-page filing typically contributes eight useful
+            pages. Covers, auditor letters, directors' reports and narrative notes stop here.
+          </p>
+          <p>
+            This is the cheapest stage to get right and the most expensive to get wrong. Every
+            page that survives costs money at every later stage, and every page wrongly dropped
+            is silently missing data with no error to catch.
+          </p>
+        </article>
+
+        <article class="step" data-stage="3">
+          <div class="step-no">stage 03</div>
+          <h3>Find the cells, not the words</h3>
+          <p>
+            Surviving pages go to table extraction, which returns cell boundaries and their
+            contents. Financial tables break the assumptions general table parsers make: merged
+            header cells spanning multiple periods, subtotal rows that look like data rows,
+            footnote markers glued to numbers, and columns whose meaning is established several
+            rows above where the numbers start.
+          </p>
+        </article>
+
+        <article class="step" data-stage="4">
+          <div class="step-no">stage 04</div>
+          <h3>Work out what each column means</h3>
+          <p>
+            A grid of cells isn't data until you know which column is the current period, which
+            is the prior, which holds line-item labels, and which is a note reference that must
+            not be read as a value. Column headers are often absent, abbreviated, or sitting in a
+            merged cell two rows up.
+          </p>
+          <p>
+            This stage assigns a role to every column, and everything downstream depends on it. A
+            period column misread as a note reference produces a complete, plausible, wrong
+            result.
+          </p>
+        </article>
+
+        <article class="step" data-stage="5">
+          <div class="step-no">stage 05</div>
+          <h3>Rebuild the relationships the layout implied</h3>
+          <p>
+            Financial statements are trees rendered as flat tables. Indentation, ordering and
+            subtotal placement encode parent/child structure that no cell contains explicitly.
+            Property, plant and equipment belongs under non-current assets because of where it
+            sits, not because anything says so.
+          </p>
+          <p>
+            This stage reconstructs that hierarchy as-is, without imposing an opinion about what
+            the statement should look like.
+          </p>
+        </article>
+
+        <article class="step" data-stage="6">
+          <div class="step-no">stage 06</div>
+          <h3>Only now does the client's schema enter</h3>
+          <p>
+            Stages one through five never learn who the client is. They resolve any filing, from
+            any jurisdiction, in any format, into a faithful representation of itself. Only here
+            does that neutral tree get mapped onto a particular client's required structure:
+            their line-item taxonomy, their groupings, their naming.
+          </p>
+          <p>
+            This boundary is the most consequential design decision in the pipeline. Putting
+            client specificity any earlier would mean a separate extraction path per client.
+            Keeping it here makes onboarding a mapping exercise rather than an engineering
+            project.
+          </p>
+        </article>
+
+        <article class="step" data-stage="7">
+          <div class="step-no">stage 07</div>
+          <h3>Structured output, and a bill for it</h3>
+          <p>
+            The result is schema-conformant JSON with the source hierarchy intact. Every stage
+            that touched it recorded its own token usage and cost, so the per-document figure is
+            measured rather than estimated, and a regression in cost is as visible as a
+            regression in accuracy.
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ARCHITECTURE & COST ==================== -->
+<section class="section section-dark">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">architecture &amp; cost</span>
+      <h2>Nine services that don't know what order they run in</h2>
+      <p>
+        The pipeline's second version was eight workers in a fixed sequence inside one process.
+        That worked until it needed to scale unevenly, fail partially, and be reasoned about per
+        stage.
+      </p>
+    </div>
+
+    <div class="metrics">
+      <div class="metric"><span class="n">1M+</span><span class="l">documents processed in production</span></div>
+      <div class="metric"><span class="n">$0.63</span><span class="l">measured cost per document</span></div>
+      <div class="metric"><span class="n">55.4M</span><span class="l">input tokens in one benchmark run</span></div>
+      <div class="metric"><span class="n">&euro;400K+</span><span class="l">client invoicing to date</span></div>
+    </div>
+
+    <div class="cols">
+      <div class="panel">
+        <h3>Discovery instead of ordering</h3>
+        <p>
+          The rewrite split it into nine independently containerized services. No service holds a
+          reference to the next one; each finishes its work, writes state, and the next stage is
+          resolved from the database. Pipeline order became data rather than code.
+        </p>
+        <p>
+          The practical payoff is that stages scale independently. OCR and table extraction are
+          the expensive stages; classification is cheap. Under a fixed sequence they scaled
+          together whether that made sense or not.
+        </p>
+        <div class="note">
+          <span class="nl">what the metadata caught</span>
+          <p>
+            A deployment alias pointed at a different model than the configuration claimed. It
+            surfaced because the pipeline reads the model name back out of every response's
+            metadata rather than trusting what it asked for. Cost per document moved before
+            anything about output quality looked wrong.
+          </p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Cost as a first-class metric</h3>
+        <p>
+          Every LLM call is attributed to the stage that made it, down to fractions of a cent,
+          and aggregated per document and per batch. That instrumentation made the routing
+          decision obvious: a small number of stages genuinely need a frontier model's reasoning,
+          and the rest are classification and formatting work a much smaller model does just as
+          well.
+        </p>
+        <p>
+          Routing by stage rather than using one model everywhere is what holds the per-document
+          figure where it is.
+        </p>
+        <div class="note">
+          <span class="nl">the decimal separator</span>
+          <p>
+            European filings write thousands separators where other conventions write decimal
+            points. Parsed with the wrong assumption, a value silently becomes a thousandth of
+            itself: a perfectly valid number, in a perfectly valid schema, that no validation
+            rule flags.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FINE-TUNING ==================== -->
+<section class="section" id="training">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">model_training</span>
+      <h2>Four fine-tunes on financial documents</h2>
+      <p>
+        Commercial document AI is built for general documents. Financial statements are not
+        general documents, and closing that gap meant training for the domain directly.
+      </p>
+    </div>
+
+    <div class="results-card">
+      <table class="results">
+        <thead>
+          <tr><th>Model</th><th>Task</th><th>Result</th><th>Detail</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>XLM-RoBERTa + LoRA</td>
+            <td>Page classification, 6 classes</td>
+            <td class="num">90.4%</td>
+            <td>648-page test set; r=16; 0.21% of parameters trained</td>
+          </tr>
+          <tr>
+            <td>Qwen3-1.7B</td>
+            <td>Column role identification</td>
+            <td class="num">deployed</td>
+            <td>Instruction-tuned, served behind the inference gateway</td>
+          </tr>
+          <tr>
+            <td>PicoDet</td>
+            <td>Layout detection</td>
+            <td class="num">mAP 0.885</td>
+            <td>Table bounding-box IoU 0.949; 100% table detection across 295 tables</td>
+          </tr>
+          <tr>
+            <td>SLANeXt</td>
+            <td>Table structure recognition</td>
+            <td class="num">34.6% to 81.6%</td>
+            <td>Validation accuracy across domain adaptation</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cols">
+      <div class="panel">
+        <h3>Page classification</h3>
+        <p>
+          XLM-RoBERTa, fine-tuned for six-class page classification on multilingual filings.
+          Trained both fully and with LoRA; the LoRA variant reaches 90.4% while training two
+          tenths of one percent of the parameters, which makes retraining on new jurisdictions
+          cheap enough to do routinely.
+        </p>
+        <p>
+          Per-class results were more useful than the aggregate. Balance sheet and cash flow
+          pages classify perfectly. The weakest class is additional notes, whose boundary is
+          genuinely blurry in the source documents rather than in the model.
+        </p>
+        <div class="note">
+          <span class="nl">why exact-match became the metric I trust</span>
+          <p>
+            On financial tables, the pretrained structure model scored 81.2% token accuracy while
+            producing no exactly correct table structures at all. Token accuracy averages over
+            thousands of tokens per table, so one missing cell tag barely moves it and completely
+            invalidates the table. Domain adaptation took validation accuracy from 34.6% to
+            81.6%, and exact-match is what showed the difference honestly.
+          </p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Layout and table structure</h3>
+        <p>
+          PicoDet was fine-tuned for layout detection, reaching mAP 0.885 with table bounding-box
+          IoU of 0.949 and detecting every table across a 295-table set. SLANeXt was fine-tuned
+          for table structure recognition on annotated financial tables.
+        </p>
+
+        <h3>The Hybrid Result</h3>
+        <p>
+          The strongest configuration paired my fine-tuned cell-structure prediction with the
+          commercial service's OCR text, matched spatially by intersection-over-union. I
+          benchmarked it against Azure Document Intelligence across 100 real filings and 295
+          tables on row-count match, full structure match, numeric F1 and per-table latency.
+        </p>
+        <p>
+          Having those numbers is what made the platform decision straightforward rather than a
+          matter of opinion, and the fine-tuned layout and classification models went into
+          production regardless, where they do work the commercial service was never going to do
+          for us.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== INFERENCE GATEWAY ==================== -->
+<section class="section" id="gateway">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">inference_infrastructure</span>
+      <h2>Somewhere to run open-weight models that isn't per-token</h2>
+      <p>
+        Once fine-tuned models existed, they needed serving. Paying per token for every call
+        forever is a choice, and it's worth having an alternative to it.
+      </p>
+    </div>
+
+    <div class="cols">
+      <div class="panel">
+        <h3>What it does</h3>
+        <p>
+          A self-hosted vLLM gateway behind a FastAPI service, containerized, running on an A100
+          MIG slice. Models load on demand rather than at boot, so the gateway can offer more
+          models than fit in memory at once.
+        </p>
+        <p>
+          A VRAM budget is enforced before any load is attempted, so a request for a model that
+          won't fit is refused cleanly instead of failing partway through and taking the resident
+          models down with it. Idle models are evicted to reclaim the space.
+        </p>
+        <h3>Why on-demand mattered</h3>
+        <p>
+          The pipeline uses different models at different stages, and stage traffic is uneven.
+          Keeping every model resident wastes most of the GPU most of the time. Loading on demand
+          trades a cold-start delay for the ability to serve a catalogue larger than the hardware.
+        </p>
+      </div>
+
+      <div class="panel">
+        <h3>The failure mode worth designing for</h3>
+        <p>
+          The interesting problem in a multi-model gateway isn't loading models. It's what happens
+          when a load request arrives and the GPU is nearly full.
+        </p>
+        <p>
+          Without a budget check, the load starts, exhausts memory partway, and takes down models
+          that were serving traffic correctly. One bad request becomes an outage for unrelated
+          stages. Checking first turns that into a refused request.
+        </p>
+        <h3>Stack</h3>
+        <p>
+          vLLM, FastAPI, Docker, Hugging Face Transformers, 4-bit quantization via BitsAndBytes,
+          NVIDIA A100 with MIG partitioning.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SEQUENCE 2: NAVIGATION AGENT ==================== -->
+<section class="section section-dark" id="agent">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 style="font-size:clamp(2.4rem,6vw,4.6rem);letter-spacing:-.042em;margin-bottom:22px">web_navigation_agent</h2>
+      <p>
+        Company filings live in government registries, one per jurisdiction, each with its own
+        search flow, session handling and idea of how a form should work. The documents feeding
+        the extraction pipeline have to be fetched before they can be read.
+      </p>
+    </div>
+
+    <div class="seq-intro-m">
+      <h2 style="font-size:1.6rem">An agent that stops being an agent once it knows the way</h2>
+      <p>Watch it find a company, download a filing, and then never need the model again.</p>
+    </div>
+
+    <div class="seq">
+      <div class="seq-col">
+        <div class="seq-sticky">
+          <div class="seq-intro">
+            <h2>An agent that stops being an agent once it knows the way</h2>
+            <p>
+              It finds the company, downloads the filing, and captures the route it took. The
+              next lookup on that registry replays the route with no model call at all.
+            </p>
+          </div>
+
+          <div class="rail" id="rail2" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+          <div class="device">
+            <div class="urlbar">
+              <span class="tl"><i></i><i></i><i></i></span>
+              <span class="u" id="url">registry.gov &nbsp;/&nbsp; company-search</span>
+            </div>
+            <div class="browser" id="browser" data-stage="1">
+
+              <!-- 1: search page -->
+              <div class="screen live" data-screen="1">
+                <div class="scr-title">Companies Register</div>
+                <div class="scr-sub">Search the register by company name or registration number</div>
+                <div class="field" id="f1">Company name</div>
+                <div class="field">Registration number</div>
+                <span class="btn-mock">Search</span>
+              </div>
+
+              <!-- 2: typed query -->
+              <div class="screen" data-screen="2">
+                <div class="scr-title">Companies Register</div>
+                <div class="scr-sub">Search the register by company name or registration number</div>
+                <div class="field focus">Northgate Holdings Ltd</div>
+                <div class="field">Registration number</div>
+                <span class="btn-mock">Search</span>
+              </div>
+
+              <!-- 3: results -->
+              <div class="screen" data-screen="3">
+                <div class="scr-title">4 results</div>
+                <div class="scr-sub">Matching "Northgate Holdings Ltd"</div>
+                <div class="rows">
+                  <div class="row hit"><span class="nm">Northgate Holdings Ltd</span><span class="meta">HE 214 887 · active</span></div>
+                  <div class="row"><span class="nm">Northgate Holdings (Cyprus) Ltd</span><span class="meta">HE 118 240 · active</span></div>
+                  <div class="row"><span class="nm">Northgate Property Holdings</span><span class="meta">HE 302 551 · dissolved</span></div>
+                  <div class="row"><span class="nm">Northgate Holdings Services</span><span class="meta">HE 409 118 · active</span></div>
+                </div>
+              </div>
+
+              <!-- 4: filings + download -->
+              <div class="screen" data-screen="4">
+                <div class="scr-title">Northgate Holdings Ltd</div>
+                <div class="scr-sub">HE 214 887 &nbsp;·&nbsp; Filed documents</div>
+                <div class="rows">
+                  <div class="row hit"><span class="nm">Annual return &amp; financial statements</span><span class="meta">PDF · 2.4 MB</span></div>
+                  <div class="row"><span class="nm">Annual return</span><span class="meta">PDF · 1.1 MB</span></div>
+                  <div class="row"><span class="nm">Certificate of incorporation</span><span class="meta">PDF · 0.3 MB</span></div>
+                </div>
+                <div class="dl">
+                  <span class="ico">PDF</span>
+                  <span>
+                    HE214887_annual_return.pdf
+                    <span class="bar"><span></span></span>
+                  </span>
+                </div>
+              </div>
+
+              <!-- 5: pattern captured -->
+              <div class="screen" data-screen="5">
+                <div class="scr-title">Route captured</div>
+                <div class="scr-sub">Stored against this registry, company values replaced</div>
+                <div class="pattern">
+                  <span class="hd">registry: registry.gov &nbsp;·&nbsp; pattern v1</span>
+                  <span class="op">goto</span> /company-search<br>
+                  <span class="op">fill</span> #name &nbsp;<span class="ph">{{COMPANY_NAME}}</span><br>
+                  <span class="op">click</span> button[type=submit]<br>
+                  <span class="op">click</span> row where name == <span class="ph">{{COMPANY_NAME}}</span><br>
+                  <span class="op">click</span> doc where type == <span class="ph">{{DOC_TYPE}}</span><br>
+                  <span class="op">download</span> &rarr; <span class="ph">{{REG_NO}}</span>_annual_return.pdf
+                </div>
+              </div>
+
+              <!-- 6: replay -->
+              <div class="screen" data-screen="6">
+                <div class="scr-title">Replaying for the next company</div>
+                <div class="scr-sub">Same registry, different company, no model call</div>
+                <div class="rows">
+                  <div class="row hit"><span class="nm">Ardmore Capital Ltd</span><span class="meta">HE 331 402 · downloaded</span></div>
+                  <div class="row hit"><span class="nm">Belfort Trading Ltd</span><span class="meta">HE 287 119 · downloaded</span></div>
+                  <div class="row hit"><span class="nm">Corvin Industries Ltd</span><span class="meta">HE 155 908 · downloaded</span></div>
+                </div>
+                <div class="replay-note">
+                  <span class="z">0 LLM calls</span>
+                  <span>route replayed from cache</span>
+                </div>
+              </div>
+
+              <svg class="cursor" id="cursor" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 2l14 9-6.5.9L15 19.5 12.4 20.6 9.2 13.6 5 17V2z" fill="#fff" stroke="#201D19" stroke-width="1.4" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="steps" id="steps2">
+        <article class="step" data-stage="1">
+          <div class="step-no">step 01</div>
+          <h3>Why not just write scrapers</h3>
+          <p>
+            A hand-written scraper per registry is the obvious approach, and it's the right one
+            until the registries change. Each site has its own layout, its own multi-step search,
+            and its own habit of shifting selectors without notice. The maintenance cost scales
+            with the number of jurisdictions and never stops.
+          </p>
+        </article>
+
+        <article class="step" data-stage="2">
+          <div class="step-no">step 02</div>
+          <h3>The agent reads the page and decides</h3>
+          <p>
+            An LLM-driven browser agent handles that variability well. It reads the rendered
+            page, works out which field wants the company name, fills it, and submits, recovering
+            when a layout differs from what any fixed selector would have expected.
+          </p>
+        </article>
+
+        <article class="step" data-stage="3">
+          <div class="step-no">step 03</div>
+          <h3>Picking the right result is the hard part</h3>
+          <p>
+            Registry search returns near-identical names: the same group's holding company, its
+            local subsidiary, a dissolved entity with almost the same title. Choosing correctly
+            needs the registration number and status read together, which is exactly the kind of
+            judgement a selector can't encode.
+          </p>
+        </article>
+
+        <article class="step" data-stage="4">
+          <div class="step-no">step 04</div>
+          <h3>Fetch the filing, not just the page</h3>
+          <p>
+            The agent opens the company record, identifies the annual return with financial
+            statements among documents whose labels vary by jurisdiction, and downloads it. The
+            file goes straight into the extraction pipeline as its input.
+          </p>
+          <p>
+            Along the way it handles JavaScript-rendered content, session and cookie state across
+            multi-step flows, and anti-bot protection.
+          </p>
+        </article>
+
+        <article class="step" data-stage="5">
+          <div class="step-no">step 05</div>
+          <h3>Memory replay: capture the route, not the result</h3>
+          <p>
+            This is the part I'd point at. Once the agent completes a lookup, it stores the exact
+            navigation path it used, with the company-specific values swapped for placeholders.
+            The route becomes a reusable artifact keyed to that registry.
+          </p>
+          <p>
+            Nothing about the page is remembered. What's remembered is the sequence of decisions
+            that worked.
+          </p>
+        </article>
+
+        <article class="step" data-stage="6">
+          <div class="step-no">step 06</div>
+          <h3>The second company costs nothing to find</h3>
+          <p>
+            Every later lookup on that registry matches the stored pattern and replays it
+            directly, substituting the new company's details, with no model call at all. The agent
+            becomes the fallback rather than the default: it runs on first contact with a
+            registry, and again when a replay fails because the site genuinely changed, at which
+            point it re-derives the route and overwrites the cached one.
+          </p>
+          <p>
+            The effect is to move the LLM off the hot path. Reasoning is used once, to discover
+            something, and its result is captured as something cheap and repeatable. The
+            expensive, variable component runs when the system meets novelty, not when it meets
+            volume.
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== STACK ==================== -->
+<section class="section" id="stack">
+  <div class="wrap">
+    <div class="sec-head"><h2>What I work with</h2></div>
+    <div class="skills">
+      <div class="skill">
+        <h4>models &amp; training</h4>
+        <p>PyTorch, Hugging Face Transformers, LoRA and PEFT fine-tuning, instruction tuning, XLM-RoBERTa, Qwen3, 4-bit quantization (BitsAndBytes), evaluation design</p>
+      </div>
+      <div class="skill">
+        <h4>llm systems</h4>
+        <p>vLLM, Azure OpenAI, Azure AI Foundry, prompt engineering, model routing, cost instrumentation, GPU and VRAM management, A100 MIG</p>
+      </div>
+      <div class="skill">
+        <h4>document ai</h4>
+        <p>Azure Document Intelligence, PaddleOCR and PaddleX, PicoDet, SLANeXt, table structure recognition, layout detection, page classification, schema mapping</p>
+      </div>
+      <div class="skill">
+        <h4>backend &amp; infrastructure</h4>
+        <p>Python, FastAPI, Flask, PostgreSQL, MySQL, Docker and Docker Compose, microservice architecture, AWS (S3, EC2, RDS), Azure, CI/CD, Azure DevOps</p>
+      </div>
+      <div class="skill">
+        <h4>automation</h4>
+        <p>Playwright, Selenium, BeautifulSoup, browser agents, dynamic content extraction, anti-bot handling</p>
+      </div>
+      <div class="skill">
+        <h4>delivery</h4>
+        <p>Architecture and cloud decisions, sprint planning and story-point estimation, engineering delivery for a seven-developer team, cross-functional work with GTM and solutioning</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CONTACT ==================== -->
+<footer class="foot" id="contact">
+  <div class="wrap">
+    <div class="foot-card">
+      <h2>Open to AI/ML engineering roles.</h2>
+      <p>Chennai or Bangalore. Happy to talk through any of the above in more detail.</p>
+      <nav class="foot-links">
+        <a class="pill pill-solid" href="mailto:ranjith.ofcl@gmail.com">ranjith.ofcl@gmail.com</a>
+        <a class="pill" href="tel:+919940036536">+91 99400 36536</a>
+        <a class="pill" href="https://www.linkedin.com/in/ranjith-ofcl/">LinkedIn</a>
+        <a class="pill" href="https://github.com/ranjith-ofcl">GitHub</a>
+      </nav>
+    </div>
+    <p class="foot-note">
+      Figures on this page come from production systems and benchmark runs I ran. The document and
+      registry screens above are illustrations built for this page; no client data, source code or
+      document samples appear anywhere on this site.
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------------- sequence 1: extraction ---------------- */
+  var doc    = document.getElementById('doc');
+  var label1 = document.getElementById('label1');
+  var rail1  = document.getElementById('rail1');
+  var steps1 = Array.prototype.slice.call(document.querySelectorAll('#steps1 .step'));
+
+  var names = {
+    1: 'stage 01 · ocr',
+    2: 'stage 02 · page classification',
+    3: 'stage 03 · table extraction',
+    4: 'stage 04 · column identification',
+    5: 'stage 05 · hierarchy',
+    6: 'stage 06 · template mapping',
+    7: 'stage 07 · output'
+  };
+
+  /* ---------------- sequence 2: browser agent ---------------- */
+  var browser = document.getElementById('browser');
+  var cursor  = document.getElementById('cursor');
+  var url     = document.getElementById('url');
+  var rail2   = document.getElementById('rail2');
+  var steps2  = Array.prototype.slice.call(document.querySelectorAll('#steps2 .step'));
+  var screens = Array.prototype.slice.call(document.querySelectorAll('#browser .screen'));
+
+  var urls = {
+    1: 'registry.gov &nbsp;/&nbsp; company-search',
+    2: 'registry.gov &nbsp;/&nbsp; company-search',
+    3: 'registry.gov &nbsp;/&nbsp; results?q=northgate+holdings',
+    4: 'registry.gov &nbsp;/&nbsp; company/HE214887/documents',
+    5: 'cache &nbsp;/&nbsp; patterns/registry.gov/v1',
+    6: 'cache &nbsp;/&nbsp; replay · batch of 3'
+  };
+
+  /* cursor targets as fractions of the browser box */
+  var spots = {
+    1: [0.20, 0.44],
+    2: [0.22, 0.46],
+    3: [0.30, 0.44],
+    4: [0.34, 0.42],
+    5: [0.70, 0.20],
+    6: [0.70, 0.20]
+  };
+
+  function setSeq1(n) {
+    doc.setAttribute('data-stage', String(n));
+    label1.innerHTML = '<i class="dot"></i>' + (names[n] || names[1]);
+    railFill(rail1, n);
+  }
+
+  function setSeq2(n) {
+    browser.setAttribute('data-stage', String(n));
+    screens.forEach(function (s) {
+      s.classList.toggle('live', s.getAttribute('data-screen') === String(n));
+    });
+    if (urls[n]) url.innerHTML = urls[n];
+    var sp = spots[n];
+    if (sp && cursor) {
+      var w = browser.clientWidth, h = browser.clientHeight;
+      cursor.style.transform = 'translate(' + (sp[0] * w) + 'px,' + (sp[1] * h) + 'px)';
+    }
+    railFill(rail2, n);
+  }
+
+  function railFill(rail, n) {
+    if (!rail) return;
+    Array.prototype.forEach.call(rail.children, function (b, i) {
+      b.classList.toggle('now',  i === n - 1);
+      b.classList.toggle('done', i <  n - 1);
+    });
+  }
+
+  if (reduce) {
+    setSeq1(3);
+    setSeq2(5);
+    steps1.concat(steps2).forEach(function (s) { s.classList.add('on'); });
+    return;
+  }
+
+  var cur1 = -1, cur2 = -1;
+
+  function nearest(list) {
+    var mid = window.innerHeight * 0.5, best = null, bd = Infinity;
+    list.forEach(function (s) {
+      var r = s.getBoundingClientRect();
+      var d = Math.abs((r.top + r.height / 2) - mid);
+      if (d < bd) { bd = d; best = s; }
+    });
+    if (!best) return null;
+    var r = best.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > window.innerHeight) return { el: best, visible: false };
+    return { el: best, visible: true };
+  }
+
+  function update() {
+    [[steps1, 1], [steps2, 2]].forEach(function (pair) {
+      var list = pair[0], which = pair[1];
+      var hit = nearest(list);
+      if (!hit) return;
+      list.forEach(function (s) { s.classList.toggle('on', s === hit.el); });
+      if (!hit.visible) return;
+      var n = parseInt(hit.el.getAttribute('data-stage'), 10);
+      if (which === 1 && n !== cur1) { cur1 = n; setSeq1(n); }
+      if (which === 2 && n !== cur2) { cur2 = n; setSeq2(n); }
+    });
+  }
+
+  var queued = false;
+  function onScroll() {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(function () { queued = false; update(); });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', function () { setSeq2(cur2 > 0 ? cur2 : 1); onScroll(); });
+  setSeq1(1);
+  setSeq2(1);
+  update();
+})();
+</script>
+
+</body>
+</html>
