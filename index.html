@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ranjith R — AI/ML Engineer</title>
+<meta name="description" content="AI/ML Engineer working on production LLM systems and document intelligence. Financial document extraction at scale, model fine-tuning, and self-hosted inference infrastructure.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============================ HERO ============================ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-id">Ranjith R &nbsp;·&nbsp; Chennai, India</div>
+    <h1>I build the parts of LLM systems that don't demo well.</h1>
+    <p class="hero-sub">
+      AI/ML Engineer, two and a half years on production document intelligence. I designed a
+      pipeline that turns unstructured financial filings into structured JSON. It became my
+      company's core product, and it has processed over a million documents.
+    </p>
+    <nav class="hero-links">
+      <a href="#pipeline">The pipeline</a>
+      <a href="#finetuning">Fine-tuning</a>
+      <a href="#gateway">Inference gateway</a>
+      <a href="#agent">Navigation agent</a>
+      <a href="mailto:ranjith.ofcl@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/ranjith-ofcl/">LinkedIn</a>
+      <a href="https://github.com/ranjith-ofcl">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ======================== PIPELINE SEQUENCE ======================== -->
+<section class="pipeline" id="pipeline">
+  <div class="wrap">
+    <div class="pipeline-intro">
+      <div class="region">
+        <div class="region-tag"><span>region · financial_document_extraction</span><span class="conf">7 stages</span></div>
+      </div>
+      <h2>A filing goes in. Structured data comes out.</h2>
+      <p>
+        Annual reports arrive as scanned PDFs, born-digital exports, and everything in between,
+        from jurisdictions that each format their statements differently. The pipeline resolves
+        them into one schema. Below is what happens to a page on its way through. Scroll, and the document on the left moves with you.
+      </p>
+    </div>
+
+    <div class="pipeline-grid">
+
+      <!-- ---------- sticky document viewer ---------- -->
+      <div class="viewer-col">
+        <div class="viewer">
+          <div class="viewer-chrome">
+            <span>filing_page_04.pdf</span>
+            <span class="stage-name" id="stageName">stage 00 · input</span>
+          </div>
+          <div class="doc" id="doc" data-stage="0">
+
+            <div class="doc-head">Consolidated Statement of Financial Position</div>
+            <div class="doc-sub">for the year ended 31 December &nbsp;·&nbsp; amounts in thousands</div>
+
+            <div class="tline" style="width:96%"></div>
+            <div class="tline" style="width:88%"></div>
+            <div class="tline" style="width:72%"></div>
+
+            <table class="tbl">
+              <thead>
+                <tr>
+                  <th>
+                    <span class="colrole">role: label</span>
+                    Item
+                  </th>
+                  <th class="num">
+                    <span class="colrole">role: cy</span>
+                    Current
+                  </th>
+                  <th class="num">
+                    <span class="colrole">role: py</span>
+                    Prior
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="keep"><td class="lbl">Non-current assets</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
+                <tr class="child keep"><td>Property, plant and equipment</td><td class="num">18,402</td><td class="num">16,955</td></tr>
+                <tr class="child keep"><td>Intangible assets</td><td class="num">4,118</td><td class="num">3,740</td></tr>
+                <tr class="child2 drop"><td>Goodwill</td><td class="num">2,650</td><td class="num">2,650</td></tr>
+                <tr class="child drop"><td>Deferred tax assets</td><td class="num">907</td><td class="num">1,102</td></tr>
+                <tr class="tot keep"><td>Total non-current assets</td><td class="num">26,077</td><td class="num">24,447</td></tr>
+                <tr class="keep"><td class="lbl">Current assets</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
+                <tr class="child keep"><td>Inventories</td><td class="num">7,331</td><td class="num">6,884</td></tr>
+                <tr class="child keep"><td>Trade receivables</td><td class="num">11,205</td><td class="num">9,517</td></tr>
+                <tr class="child drop"><td>Cash and cash equivalents</td><td class="num">3,946</td><td class="num">5,220</td></tr>
+                <tr class="tot keep"><td>Total current assets</td><td class="num">22,482</td><td class="num">21,621</td></tr>
+                <tr class="tot keep"><td>Total assets</td><td class="num">48,559</td><td class="num">46,068</td></tr>
+              </tbody>
+            </table>
+
+            <div class="tline" style="width:64%; margin-top:14px"></div>
+
+            <!-- stage 2 classification badge -->
+            <div class="classify">
+              <span class="cls">page_class: balance_sheet</span>
+              <span class="cls keep-tag">routed downstream</span>
+              <span class="cls drop-tag">82 of 90 pages dropped</span>
+            </div>
+
+            <!-- stage 7 overlay -->
+            <div class="json-out">
+<span class="k">"statement"</span>: <span class="v">"balance_sheet"</span>,<br>
+<span class="k">"period"</span>: { <span class="k">"cy"</span>: <span class="v">"FY-current"</span>, <span class="k">"py"</span>: <span class="v">"FY-prior"</span> },<br>
+<span class="k">"unit"</span>: <span class="v">"thousands"</span>,<br>
+<span class="k">"lines"</span>: [<br>
+&nbsp;&nbsp;{ <span class="k">"label"</span>: <span class="v">"non_current_assets"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">"children"</span>: [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="k">"label"</span>: <span class="v">"ppe"</span>, <span class="k">"cy"</span>: <span class="n">18402</span>, <span class="k">"py"</span>: <span class="n">16955</span> },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="k">"label"</span>: <span class="v">"intangibles"</span>, <span class="k">"cy"</span>: <span class="n">4118</span>, <span class="k">"py"</span>: <span class="n">3740</span> }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">"total"</span>: { <span class="k">"cy"</span>: <span class="n">26077</span>, <span class="k">"py"</span>: <span class="n">24447</span> } },<br>
+&nbsp;&nbsp;{ <span class="k">"label"</span>: <span class="v">"current_assets"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">"total"</span>: { <span class="k">"cy"</span>: <span class="n">22482</span>, <span class="k">"py"</span>: <span class="n">21621</span> } }<br>
+],<br>
+<span class="k">"total_assets"</span>: { <span class="k">"cy"</span>: <span class="n">48559</span>, <span class="k">"py"</span>: <span class="n">46068</span> }
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ---------- scrolling stage prose ---------- -->
+      <div class="stages">
+
+        <article class="stage" data-stage="1">
+          <div class="stage-no">stage 01</div>
+          <h3>Read everything first, understand nothing yet</h3>
+          <p>
+            Every page gets plain-text OCR before any decision is made about it. This looks wasteful, since most pages in an annual report are narrative that will never be extracted, but it's the only way to classify a page on content rather than on position. Filings don't put the balance sheet on page 12 by agreement.
+          </p>
+          <p>
+            The output at this stage is deliberately dumb: text and coordinates, no interpretation.
+          </p>
+        </article>
+
+        <article class="stage" data-stage="2">
+          <div class="stage-no">stage 02</div>
+          <h3>Throw most of the document away</h3>
+          <p>
+            A page classifier sorts each page into one of six classes and routes only the
+            financial statements onward. A 90-page filing typically contributes eight useful
+            pages. Everything else stops here: covers, auditor letters, directors' reports, narrative notes.
+          </p>
+          <p>
+            This is the cheapest stage to get right and the most expensive to get wrong. Every
+            page that survives costs money at every subsequent stage, and every page wrongly
+            dropped is silently missing data with no error to catch.
+          </p>
+        </article>
+
+        <article class="stage" data-stage="3">
+          <div class="stage-no">stage 03</div>
+          <h3>Find the cells, not the words</h3>
+          <p>
+            Surviving pages go to table extraction, which returns cell boundaries and their
+            contents. Financial tables break the assumptions general table parsers make: merged header cells spanning multiple periods, subtotal rows that look like data rows, footnote markers glued to numbers, and columns whose meaning is established several rows above where the numbers start.
+          </p>
+        </article>
+
+        <article class="stage" data-stage="4">
+          <div class="stage-no">stage 04</div>
+          <h3>Work out what each column means</h3>
+          <p>
+            A grid of cells isn't data until you know which column is the current period, which is
+            the prior, which holds line-item labels, and which is a note reference that must not
+            be read as a value. Column headers are often absent, abbreviated, or placed in a
+            merged cell two rows up.
+          </p>
+          <p>
+            This stage assigns a role to every column. Everything downstream depends on it, which makes it the stage where a quiet error does the most damage. A period column misread as a note reference produces a complete, plausible, wrong result.
+          </p>
+        </article>
+
+        <article class="stage" data-stage="5">
+          <div class="stage-no">stage 05</div>
+          <h3>Rebuild the relationships the layout implied</h3>
+          <p>
+            Financial statements are trees rendered as flat tables. Indentation, ordering, and
+            subtotal placement encode parent/child structure that no cell contains
+            explicitly. Property, plant and equipment belongs under non-current assets because of
+            where it sits, not because anything says so.
+          </p>
+          <p>
+            This stage reconstructs that hierarchy as-is, without imposing an opinion about what
+            the statement should look like. Getting this wrong doesn't produce garbage; it produces
+            a tree that balances and means something different.
+          </p>
+        </article>
+
+        <article class="stage" data-stage="6">
+          <div class="stage-no">stage 06</div>
+          <h3>Only now does the client's schema enter</h3>
+          <p>
+            Stages one through five never learn who the client is. They resolve any filing, from
+            any jurisdiction, in any format, into a faithful representation of itself. Only at
+            stage six does that neutral tree get mapped onto a particular client's required structure: their line-item taxonomy, their groupings, their naming.
+          </p>
+          <p>
+            This boundary is the single most consequential design decision in the pipeline.
+            Putting client specificity anywhere earlier would mean a new extraction path per
+            client. Keeping it here makes onboarding a mapping exercise rather than an engineering
+            project.
+          </p>
+        </article>
+
+        <article class="stage" data-stage="7">
+          <div class="stage-no">stage 07</div>
+          <h3>Structured output, and a bill for it</h3>
+          <p>
+            The result is schema-conformant JSON with the source hierarchy intact. Every stage
+            that touched it recorded its own token usage and cost, so the per-document figure is
+            measured rather than estimated, and a regression in cost is as visible as a
+            regression in accuracy.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== ARCHITECTURE ======================== -->
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">region · architecture &amp; cost</div>
+      <h2>Nine services that don't know what order they run in</h2>
+      <p>
+        The pipeline's second version was eight workers in a fixed sequence inside one process.
+        That worked until it needed to scale unevenly, fail partially, and be reasoned about
+        per stage.
+      </p>
+    </div>
+
+    <div class="split">
+      <div class="prose">
+        <h3>Discovery instead of ordering</h3>
+        <p>
+          The rewrite split it into nine independently containerized services. No service holds a
+          reference to the next one; each finishes its work, writes state, and the next stage is
+          resolved from the database. Pipeline order became data rather than code.
+        </p>
+        <p>
+          The practical payoff is that stages scale independently. OCR and table extraction are
+          the expensive stages; classification is cheap. Under a fixed sequence they scaled
+          together whether that made sense or not.
+        </p>
+
+        <h3>Cost as a first-class metric</h3>
+        <p>
+          Every LLM call is attributed to the stage that made it, down to fractions of a cent, and
+          aggregated per document and per batch. That instrumentation made the routing decision
+          obvious: a small number of stages genuinely need a frontier model's reasoning, and the
+          rest are classification and formatting work that a much smaller model does just as well.
+        </p>
+        <p>
+          Routing by stage rather than using one model everywhere is what holds the per-document
+          figure where it is.
+        </p>
+      </div>
+
+      <div class="prose">
+        <div class="metrics">
+          <div class="metric"><span class="n">1M+</span><span class="l">documents processed in production</span></div>
+          <div class="metric"><span class="n">$0.63</span><span class="l">measured cost per document</span></div>
+          <div class="metric"><span class="n">55.4M</span><span class="l">input tokens in one benchmark run</span></div>
+          <div class="metric"><span class="n">&euro;400K+</span><span class="l">client invoicing to date</span></div>
+        </div>
+
+        <div class="finding">
+          <span class="fl">what the metadata caught</span>
+          <p>
+            A deployment alias pointed at a different model than the configuration claimed. It surfaced because the pipeline reads the model name back out of each response's metadata rather than trusting what it asked for. Cost per document moved before
+            anything about output quality looked wrong.
+          </p>
+        </div>
+
+        <div class="finding">
+          <span class="fl">the decimal separator</span>
+          <p>
+            European filings write thousands separators where other conventions write decimal
+            points. Parsed with the wrong assumption, a value silently becomes a thousandth of itself: a perfectly valid number, in a perfectly valid schema, that no validation rule flags.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== FINE-TUNING ======================== -->
+<section class="section" id="finetuning">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">region · model_training</div>
+      <h2>Four fine-tunes, and a recommendation not to ship them</h2>
+      <p>
+        Commercial document AI services are good at general documents. Financial statements are
+        not general documents. That gap is worth measuring rather than assuming, in either
+        direction.
+      </p>
+    </div>
+
+    <div class="prose">
+      <h3>Page classification</h3>
+      <p>
+        XLM-RoBERTa, fine-tuned for six-class page classification on multilingual filings. Trained
+        both fully and with LoRA; the LoRA variant trains a fraction of a percent of the
+        parameters and gets there.
+      </p>
+
+      <table class="results">
+        <thead>
+          <tr><th>Model</th><th>Task</th><th>Result</th><th>Note</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>XLM-RoBERTa + LoRA</td>
+            <td>Page classification, 6 classes</td>
+            <td class="num">90.4%</td>
+            <td>648-page test set; 0.21% of parameters trained; r=16</td>
+          </tr>
+          <tr>
+            <td>Qwen3-1.7B</td>
+            <td>Column role identification</td>
+            <td class="num">&mdash;</td>
+            <td>Instruction-tuned, served behind the inference gateway</td>
+          </tr>
+          <tr>
+            <td>PicoDet</td>
+            <td>Layout detection</td>
+            <td class="num">mAP 0.885</td>
+            <td>Table bounding-box IoU 0.949; 100% table detection across 295 tables</td>
+          </tr>
+          <tr>
+            <td>SLANeXt</td>
+            <td>Table structure recognition</td>
+            <td class="num">34.6% &rarr; 81.6%</td>
+            <td>Validation accuracy, before and after domain adaptation</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        Per-class results were more useful than the aggregate. Balance sheet and cash flow pages
+        classified perfectly; the weakest class was additional notes, which is the class whose
+        boundary is genuinely blurry in the source documents rather than in the model.
+      </p>
+
+      <div class="finding">
+        <span class="fl">the finding that changed how I read metrics</span>
+        <p>
+          Before fine-tuning, the pretrained structure model scored 81.2% token accuracy on
+          financial tables and produced <strong>zero</strong> exact structure matches across
+          fifteen tables. Not a low number. None.
+        </p>
+        <p>
+          Token accuracy averages over thousands of tokens per table. A single missing cell tag
+          barely moves it and completely invalidates the table. The aggregate metric was reporting
+          near-success on a model that was unusable for the task, and only exact-match told the
+          truth.
+        </p>
+      </div>
+
+      <h3>The hybrid, and the honest result</h3>
+      <p>
+        The best-performing configuration paired my fine-tuned cell-structure prediction with the
+        commercial service's OCR text, matched spatially by IoU. It was benchmarked against Azure
+        Document Intelligence across 100 real filings and 295 tables on row-count match, full
+        structure match, numeric F1, and per-table latency.
+      </p>
+      <p>
+        It did not win. Full structure match was 16.3%, numeric F1 76.9%. A third option scored
+        higher on numeric F1 than either, at roughly ten times the latency per table.
+      </p>
+      <p>
+        So the recommendation was to stay on the commercial service. Fine-tuning had proved necessary, since the pretrained models were not merely worse but unusable, and it still hadn't proved sufficient. Those are different conclusions, and the useful
+        outcome of the work was knowing which one applied.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== INFERENCE GATEWAY ======================== -->
+<section class="section section-alt" id="gateway">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">region · inference_infrastructure</div>
+      <h2>Somewhere to run open-weight models that isn't per-token</h2>
+      <p>
+        Once fine-tuned models existed, they needed serving. Paying per token for every call
+        forever is a choice, and it's worth having an alternative to it.
+      </p>
+    </div>
+
+    <div class="split">
+      <div class="prose">
+        <h3>What it does</h3>
+        <p>
+          A self-hosted vLLM gateway behind a FastAPI service, containerized, running on an A100
+          MIG slice. Models load on demand rather than at boot, so the gateway can offer more
+          models than fit in memory at once.
+        </p>
+        <p>
+          A VRAM budget is enforced before any load is attempted, so a request for a model that
+          won't fit is refused cleanly instead of failing partway through and taking the resident
+          models down with it. Idle models are evicted to reclaim the space.
+        </p>
+
+        <h3>Why on-demand mattered</h3>
+        <p>
+          The pipeline uses different models at different stages, and stage traffic is uneven.
+          Keeping every model resident wastes most of the GPU most of the time. Loading on demand
+          trades a cold-start delay for the ability to serve a catalogue larger than the hardware.
+        </p>
+      </div>
+
+      <div class="prose">
+        <div class="finding">
+          <span class="fl">the failure mode worth designing for</span>
+          <p>
+            The interesting problem in a multi-model gateway isn't loading models. It's what
+            happens when a load request arrives and the GPU is nearly full.
+          </p>
+          <p>
+            Without a budget check, the load starts, exhausts memory partway, and takes down
+            models that were serving traffic correctly. One bad request becomes an outage for
+            unrelated stages. Checking first turns that into a refused request.
+          </p>
+        </div>
+
+        <h3>Stack</h3>
+        <p>
+          vLLM, FastAPI, Docker, Hugging Face Transformers, 4-bit quantization via BitsAndBytes,
+          NVIDIA A100 with MIG partitioning.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== NAVIGATION AGENT ======================== -->
+<section class="section" id="agent">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">region · web_navigation_agent</div>
+      <h2>An agent that stops being an agent once it knows the way</h2>
+      <p>
+        Company filings live in government registries, one per jurisdiction, each with its own search flow, session handling, and idea of how a form should work. The documents feeding
+        the extraction pipeline have to be fetched before they can be read.
+      </p>
+    </div>
+
+    <div class="split">
+      <div class="prose">
+        <h3>Why not just write scrapers</h3>
+        <p>
+          A hand-written scraper per registry is the obvious approach, and it's the right one
+          until the registries change. Each site has its own layout, its own multi-step search,
+          and its own habit of shifting selectors without notice. The maintenance cost scales with
+          the number of jurisdictions and never stops.
+        </p>
+        <p>
+          An LLM-driven browser agent handles that variability well. It reads the page, decides
+          where to click, and recovers when a layout differs from what a fixed selector expected.
+        </p>
+
+        <h3>Why not just use the agent</h3>
+        <p>
+          Because it's slow and it costs money on every run, and the second company you look up on
+          a given registry follows exactly the same path as the first. Paying a model to
+          rediscover a known route is waste, and it introduces variance into a process that was
+          deterministic the moment the route was known.
+        </p>
+      </div>
+
+      <div class="prose">
+        <h3>Memory replay</h3>
+        <p>
+          So the agent records its successful navigation path, with the company-specific values
+          replaced by placeholders. The next lookup on the same registry matches that stored
+          pattern and replays the sequence directly, substituting the new company's details, with
+          no model call at all.
+        </p>
+        <p>
+          The agent is the fallback rather than the default. It runs on the first encounter with a
+          registry, and again when a replay fails because the site genuinely changed, at which point it re-derives the path and overwrites the cached one.
+        </p>
+
+        <div class="finding">
+          <span class="fl">what this pattern is really doing</span>
+          <p>
+            It moves the LLM from the hot path to the cold path. Reasoning is used once, to discover something, and its result is captured as something cheap and repeatable. The
+            expensive, variable component runs when the system encounters novelty, not when it
+            encounters volume.
+          </p>
+        </div>
+
+        <h3>Also handled</h3>
+        <p>
+          JavaScript-rendered content, session and cookie state across multi-step flows, anti-bot
+          protection, and document download with face-page extraction. Built with Playwright,
+          Selenium, and BeautifulSoup depending on what a given target needed. Led two developers
+          on delivery.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== SKILLS ======================== -->
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">region · stack</div>
+      <h2>What I work with</h2>
+    </div>
+    <div class="skills">
+      <div class="skill-grp">
+        <h4>models &amp; training</h4>
+        <p>PyTorch, Hugging Face Transformers, LoRA and PEFT fine-tuning, instruction tuning, XLM-RoBERTa, Qwen3, 4-bit quantization (BitsAndBytes), evaluation design</p>
+      </div>
+      <div class="skill-grp">
+        <h4>llm systems</h4>
+        <p>vLLM, Azure OpenAI, Azure AI Foundry, prompt engineering, model routing, cost instrumentation, GPU and VRAM management, A100 MIG</p>
+      </div>
+      <div class="skill-grp">
+        <h4>document ai</h4>
+        <p>Azure Document Intelligence, PaddleOCR and PaddleX, PicoDet, SLANeXt, table structure recognition, layout detection, page classification, schema mapping</p>
+      </div>
+      <div class="skill-grp">
+        <h4>backend &amp; infrastructure</h4>
+        <p>Python, FastAPI, Flask, PostgreSQL, MySQL, Docker and Docker Compose, microservice architecture, AWS (S3, EC2, RDS), Azure, CI/CD, Azure DevOps</p>
+      </div>
+      <div class="skill-grp">
+        <h4>automation</h4>
+        <p>Playwright, Selenium, BeautifulSoup, browser agents, dynamic content extraction, anti-bot handling</p>
+      </div>
+      <div class="skill-grp">
+        <h4>delivery</h4>
+        <p>Architecture and cloud decisions, sprint planning and story-point estimation, engineering delivery for a seven-developer team, cross-functional work with GTM and solutioning</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== FOOTER ======================== -->
+<footer class="foot">
+  <div class="wrap">
+    <h2>Open to AI/ML engineering roles.</h2>
+    <p>Chennai or Bangalore. Happy to talk through any of the above in more detail.</p>
+    <nav class="foot-links">
+      <a href="mailto:ranjith.ofcl@gmail.com">ranjith.ofcl@gmail.com</a>
+      <a href="https://www.linkedin.com/in/ranjith-ofcl/">LinkedIn</a>
+      <a href="https://github.com/ranjith-ofcl">GitHub</a>
+    </nav>
+    <p class="foot-note">
+      Figures on this page come from production systems and benchmark runs I ran. Document
+      contents shown in the viewer above are invented for illustration; no client data, source
+      code, or document samples appear anywhere on this site.
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var doc   = document.getElementById('doc');
+  var label = document.getElementById('stageName');
+  var stages = Array.prototype.slice.call(document.querySelectorAll('.stage'));
+
+  var names = {
+    0: 'stage 00 · input',
+    1: 'stage 01 · ocr',
+    2: 'stage 02 · page classification',
+    3: 'stage 03 · table extraction',
+    4: 'stage 04 · column identification',
+    5: 'stage 05 · hierarchy',
+    6: 'stage 06 · template mapping',
+    7: 'stage 07 · output'
+  };
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) {
+    doc.setAttribute('data-stage', '3');
+    label.textContent = 'all stages';
+    stages.forEach(function (s) { s.classList.add('on'); });
+    return;
+  }
+
+  var current = -1;
+
+  function setStage(n) {
+    if (n === current) return;
+    current = n;
+    doc.setAttribute('data-stage', String(n));
+    label.textContent = names[n] || names[0];
+  }
+
+  function update() {
+    var mid = window.innerHeight * 0.5;
+    var best = null, bestDist = Infinity;
+
+    stages.forEach(function (s) {
+      var r = s.getBoundingClientRect();
+      var c = r.top + r.height / 2;
+      var d = Math.abs(c - mid);
+      if (d < bestDist) { bestDist = d; best = s; }
+    });
+
+    stages.forEach(function (s) { s.classList.toggle('on', s === best); });
+
+    if (!best) return;
+    var r = best.getBoundingClientRect();
+    // only drive the viewer while a stage is actually in view
+    if (r.bottom < 0 || r.top > window.innerHeight) return;
+    setStage(parseInt(best.getAttribute('data-stage'), 10));
+  }
+
+  var queued = false;
+  function onScroll() {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(function () { queued = false; update(); });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+})();
+</script>
+
+</body>
+</html>
